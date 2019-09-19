@@ -1,0 +1,12 @@
+{
+  "namespaceStrategies": {
+    "ConfigurableNamespaceStrategy": "Konfigurierbar"
+  },
+  "scm-nssample-plugin": {
+    "navigation": "Namespace",
+    "title": "Namespace Konfiguration",
+    "namespace": "Namespace",
+    "save": "Speichern",
+    "submitted": "Erfolgreich gespeichert"
+  }
+}
