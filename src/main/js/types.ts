@@ -1,4 +1,3 @@
-// @flow
 export type NamespaceConfiguration = {
-  namespace: string
+  namespace: string;
 };

@@ -1,28 +1,19 @@
-//@flow
 import React from "react";
-import {
-  apiClient,
-  ErrorNotification,
-  Loading,
-  Notification,
-  Subtitle
-} from "@scm-manager/ui-components";
-import { translate } from "react-i18next";
-import type { NamespaceConfiguration } from "./types";
+import { apiClient, ErrorNotification, Loading, Notification, Subtitle } from "@scm-manager/ui-components";
+import { withTranslation, WithTranslation } from "react-i18next";
+import { NamespaceConfiguration } from "./types";
 import NamespaceConfigurationForm from "./NamespaceConfigurationForm";
 
-type Props = {
-  link: string,
-
-  // context props
-  t: string => string
+type Props = WithTranslation & {
+  link: string;
 };
 
 type State = {
-  configuration?: NamespaceConfiguration,
-  loading: boolean,
-  error?: error,
-  submitted: boolean
+  configuration?: NamespaceConfiguration;
+  loading: boolean;
+  error?: error;
+
+  submitted: boolean;
 };
 
 class NamespaceConfigurationPage extends React.Component<Props, State> {
@@ -33,7 +24,6 @@ class NamespaceConfigurationPage extends React.Component<Props, State> {
       submitted: false
     };
   }
-
   componentDidMount() {
     this.setState({
       loading: true
@@ -55,13 +45,11 @@ class NamespaceConfigurationPage extends React.Component<Props, State> {
         });
       });
   }
-
   configSubmitted = () => {
     this.setState({
       submitted: true
     });
   };
-
   render() {
     const { link, t } = this.props;
     const { configuration, loading, submitted, error } = this.state;
@@ -72,23 +60,13 @@ class NamespaceConfigurationPage extends React.Component<Props, State> {
       children = <ErrorNotification error={error} />;
     } else if (configuration) {
       children = (
-        <NamespaceConfigurationForm
-          url={link}
-          config={configuration}
-          onConfigSubmitted={this.configSubmitted}
-        />
+        <NamespaceConfigurationForm url={link} config={configuration} onConfigSubmitted={this.configSubmitted} />
       );
     }
-
     let submittedNotification = null;
     if (submitted) {
-      submittedNotification = (
-        <Notification type="success">
-          {t("scm-nssample-plugin.submitted")}
-        </Notification>
-      );
+      submittedNotification = <Notification type="success">{t("scm-nssample-plugin.submitted")}</Notification>;
     }
-
     return (
       <>
         <Subtitle subtitle={t("scm-nssample-plugin.title")} />
@@ -98,5 +76,4 @@ class NamespaceConfigurationPage extends React.Component<Props, State> {
     );
   }
 }
-
-export default translate("plugins")(NamespaceConfigurationPage);
+export default withTranslation("plugins")(NamespaceConfigurationPage);

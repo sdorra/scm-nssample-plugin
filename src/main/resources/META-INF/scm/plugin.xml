@@ -43,4 +43,9 @@
     <category>Administration</category>
   </information>
 
+
+  <resources>
+    <script>assets/scm-nssample-plugin.bundle.js</script>
+  </resources>
+
 </plugin>
